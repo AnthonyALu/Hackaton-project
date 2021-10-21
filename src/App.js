@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import SerachByName from "./components/SearchByName";
 import "bootstrap/dist/css/bootstrap.css";
 import SearchByIngredients from "./components/SerachByIngredients";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <SerachByName />
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 };
