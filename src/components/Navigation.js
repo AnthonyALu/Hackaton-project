@@ -8,7 +8,7 @@ const Navigation = () => {
     <>
       <Navbar bg='dark' variant='dark'>
         <Container>
-          <Navbar.Brand href='#home'>
+          <Navbar.Brand href="/">
             <img
               alt=''
               src='https://www.svgrepo.com/show/287733/burger.svg'

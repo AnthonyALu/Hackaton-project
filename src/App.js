@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
@@ -5,6 +6,7 @@ import HomePage from './components/HomePage';
 import SerachByName from './components/SearchByName';
 import 'bootstrap/dist/css/bootstrap.css';
 import SearchByIngredients from './components/SerachByIngredients';
+import Footer from "./components/Footer";
 import FoodByLetter from './components/FoodByLetter';
 
 const App = () => {
@@ -25,6 +27,7 @@ const App = () => {
           <FoodByLetter />
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 };
