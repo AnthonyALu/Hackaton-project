@@ -1,31 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 
 const Navigation = () => {
   return (
     <>
-      <section className='section'>
-        <div className='container'>
-          <header className='header'>
-            <div className='logo-container'>
-              <h2>Food Recepie</h2>
-            </div>
-            <nav className='navbar'>
-              <ul>
-                <li>
-                  <Link to='/'>Home</Link>
-                </li>
-                <li>
-                  <Link to='/searchname'>Search By Name</Link>
-                </li>
-                <li>
-                  <Link to='/searchingredients'>Search By Ingredients</Link>
-                </li>
-              </ul>
-            </nav>
-          </header>
-        </div>
-      </section>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src="https://www.svgrepo.com/show/287733/burger.svg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{" "}
+            Food Recipes
+          </Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/searchname">Search By Name</Nav.Link>
+            <Nav.Link href="/searchingredients">Search by Ingredients</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
     </>
   );
 };
