@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-
+import FoodModal from './FoodModal';
 const FoodByLetter = () => {
   // store food in foods state when it's fetched
   const [foods, setFoods] = useState([]);
-  // loading will be used to show loading text while the gets fetched
-  const [loading, setLoading] = useState(true);
+  const [recipe, setRecipe] = useState([]);
   // with clickig the letters, letter state will be add as a eendpoint to the API url
   const [letter, setLetter] = useState('');
-  // Create an array of a;phabets
+  // set state for showin the modal
+  const [modalShow, setModalShow] = useState(false);
+  // Create an array of alphabets
   const alphabet = [...Array(26).keys()].map((i) =>
     String.fromCharCode(i + 97)
   );
@@ -30,6 +31,16 @@ const FoodByLetter = () => {
   const handleLetter = (letter) => {
     setLetter(letter);
   };
+  // handle modal will chekc to see if the foodid is the same as id, and it will return the food with the same it and set it to the recepie
+  const handleModal = (id) => {
+    setModalShow(true);
+    foods.map((food) => {
+      if (food.idMeal === id) {
+        setRecipe(food);
+      }
+    });
+  };
+  console.log(recipe);
 
   return (
     <>
@@ -40,6 +51,11 @@ const FoodByLetter = () => {
           You can Find Food By First Letter
         </h1>
       </Container>
+      <FoodModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        {...recipe}
+      />
       <Container>
         <Row>
           {/* maping therough array of alphabet and showing each letter as a button */}
@@ -59,7 +75,7 @@ const FoodByLetter = () => {
         </Row>
         <Row>
           {/* mapping through foods state and showing each food as a single card with image */}
-          {foods.map((food, idx) => {
+          {foods.map((food) => {
             const { idMeal, strCategory, strMeal, strMealThumb, strArea } =
               food;
             return (
@@ -71,7 +87,9 @@ const FoodByLetter = () => {
                     <Card.Text>Category: {strCategory}</Card.Text>
                     <Card.Text>{strArea} Cuisine</Card.Text>
 
-                    <Button variant='primary'>View Details</Button>
+                    <Button variant='dark' onClick={() => handleModal(idMeal)}>
+                      View Recipe
+                    </Button>
                   </Card.Body>
                 </Card>
               </Col>
