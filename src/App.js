@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
 import SerachByName from './components/SearchByName';
 import 'bootstrap/dist/css/bootstrap.css';
-import SearchByIngredients from './components/SerachByIngredients';
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 import FoodByLetter from './components/FoodByLetter';
+import SearchRandom from './components/SerachRandom';
 
 const App = () => {
   return (
@@ -20,8 +19,8 @@ const App = () => {
         <Route path='/searchname'>
           <SerachByName />
         </Route>
-        <Route path='/searchingredients'>
-          <SearchByIngredients />
+        <Route path='/searchrandom'>
+          <SearchRandom />
         </Route>
         <Route path='/searchletters'>
           <FoodByLetter />

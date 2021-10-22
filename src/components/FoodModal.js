@@ -1,8 +1,10 @@
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Modal, Button, ListGroup } from 'react-bootstrap';
 
 function FoodModal(props) {
-  const { strCategory, strMeal, strInstructions, strMealThumb } = props;
+  const [show, setShow] = useState(false);
+  const { strCategory, strMeal, strInstructions } = props;
   const {
     strIngredient1,
     strIngredient2,
@@ -33,7 +35,14 @@ function FoodModal(props) {
       <Modal.Body>
         <h3>{strCategory}</h3>
         <h4>Instructions:</h4>
-        <p>{strInstructions}</p>
+        {strInstructions && (
+          <p>
+            {show ? strInstructions : `${strInstructions.substring(0, 200)}...`}
+            <button className='btn-modal' onClick={() => setShow(!show)}>
+              {show ? 'Show Less' : 'Read More'}
+            </button>
+          </p>
+        )}
       </Modal.Body>
       <Modal.Body>
         <h4>Ingredients: </h4>
