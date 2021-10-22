@@ -4,8 +4,7 @@ class RecipeForm extends Component {
   state = {
     title: "",
     ingredients: [{ ingredient_name: "", qty: "", units: "" }],
-    instructions = "",
-    ownRecipe: true,
+    instructions: "",
   };
 
   handleFieldChange = (event) => {
