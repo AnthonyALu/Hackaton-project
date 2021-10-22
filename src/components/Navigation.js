@@ -1,21 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 
 const Navigation = () => {
   return (
     <>
-      <Navbar bg='dark' variant='dark'>
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href='/'>
             <img
-              alt=''
-              src='https://www.svgrepo.com/show/287733/burger.svg'
-              width='30'
-              height='30'
-              className='d-inline-block align-top'
-            />{' '}
+              alt=""
+              src="https://www.svgrepo.com/show/287733/burger.svg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{" "}
             Food Recipes
           </Navbar.Brand>
           <Nav className='me-auto'>
