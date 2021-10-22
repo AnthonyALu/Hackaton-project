@@ -16,11 +16,15 @@ const FoodByLetter = () => {
   );
   // fetching all the food usinf async await
   const fetchFood = async () => {
-    let response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
-    );
-    let data = await response.json();
-    setFoods(data.meals);
+    try {
+      let response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
+      );
+      let data = await response.json();
+      setFoods(data.meals);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   // useEffect will load the fetchFood function and it has a dependency which is letter state, every time the letter value gets changed, useEffect will reload the fetch food fucntion
   useEffect(() => {
@@ -40,7 +44,6 @@ const FoodByLetter = () => {
       }
     });
   };
-  console.log(recipe);
 
   return (
     <>
