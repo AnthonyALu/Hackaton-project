@@ -10,40 +10,47 @@ body {
 
   line-height: 1.4;
 }
-.section {
-  height: 100px;
-  background: rgb(94, 141, 250);
-  color: #fff;
-}
+
 .container {
   width: 1270px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo-container h2 {
-  font-size: 2.5rem;
-}
-.navbar ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.navbar ul li {
-  margin: 0 1rem;
-}
-.navbar ul li a {
+.btn-modal {
+  border: none;
+  color: rgb(49, 135, 255);
   text-decoration: none;
-  color: #fff;
-  font-size: 1.2rem;
+  background: transparent;
+}
 
-  padding-bottom: 0.5rem;
-  transition: all 0.3s ease-in-out;
+.random-img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+}
+
+.random-img-container {
+  position: relative;
+}
+.random-img-container::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  width: 400px;
+  height: 400px;
+  border: 5px solid #555;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  z-index: -1;
+}
+
+@media (max-width: 1400px) {
+  .random-img-container::after {
+    display: none;
+  }
 }

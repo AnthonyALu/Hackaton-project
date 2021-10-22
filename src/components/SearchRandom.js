@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, ListGroup, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 
-const SearchByName = () => {
-  // set state to store single food with request
-  const [singleFood, setSingleFood] = useState([]);
-  const [showSearchedFood, setShowSearchedFood] = useState([]);
+const url = "https://www.themealdb.com/api/json/v1/1/random.php";
+const SearchRandom = () => {
+  // set state to store random food with request
+  const [randomFood, setRandomFood] = useState([]);
+  const [showRandomFood, setShowRandomFood] = useState([]);
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
-
   const fetchRandomFood = async () => {
     try {
-      let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${singleFood}`);
+      let response = await fetch(url);
       let data = await response.json();
-      setSingleFood(data.meals[0]);
+      setRandomFood(data.meals[0]);
     } catch (err) {
       setError(
         `Something went wrong, please visit other pages and come back later. ${err.message}`
@@ -22,16 +22,10 @@ const SearchByName = () => {
 
   useEffect(() => {
     fetchRandomFood();
-  }, [showSearchedFood]);
-
-  console.log(singleFood);
-
-  const submitForm = (e) => {
-    e.preventDefault();
-  }
+  }, [showRandomFood]);
 
   const { strMeal, strCategory, strMealThumb, strArea, strInstructions } =
-    singleFood;
+    showRandomFood;
   const {
     strIngredient1,
     strIngredient2,
@@ -39,7 +33,7 @@ const SearchByName = () => {
     strIngredient4,
     strIngredient5,
     strIngredient6,
-  } = singleFood;
+  } = showRandomFood;
   const {
     strMeasure1,
     strMeasure2,
@@ -47,8 +41,7 @@ const SearchByName = () => {
     strMeasure4,
     strMeasure5,
     strMeasure6,
-  } = singleFood;
-
+  } = showRandomFood;
   if (error) {
     return (
       <>
@@ -60,26 +53,16 @@ const SearchByName = () => {
   }
   return (
     <Container className="mt-5">
-      <Form onSubmit={(e) => submitForm(e)}>
-        <Form.Group className="mb-3">
-          <Form.Label>What you are looking for...</Form.Label>
-          <Form.Control type="text" placeholder="Type Food Name Here!" className="mb-2" onChange={(e) => setSingleFood(e.target.value)} singleFood={singleFood} />
-          <Form.Text className="text-muted">
-            Hopefully find your food....
-          </Form.Text>
-        </Form.Group>
-          <Button
-          variant="dark"
-          size="sm"
-          active
-          onClick={() => setShowSearchedFood(singleFood)}
-        >
-          Search by Name
-        </Button>
-      </Form>
-      
+      <Button
+        variant="dark"
+        size="lg"
+        active
+        onClick={() => setShowRandomFood(randomFood)}
+      >
+        Get Random Recipe
+      </Button>
       <Row className="mt-5">
-        {singleFood ? (
+        {showRandomFood ? (
           <Col sm={8}>
             <h3>{strMeal}</h3>
             <h4>{strArea} Cuisine </h4>
@@ -116,7 +99,7 @@ const SearchByName = () => {
             </ListGroup>
           </Col>
         ) : null}
-        {showSearchedFood && (
+        {showRandomFood && (
           <Col sm={4} className="random-img-container">
             <img src={strMealThumb} alt="" className="random-img" />
           </Col>
@@ -126,5 +109,4 @@ const SearchByName = () => {
   );
 };
 
-export default SearchByName;
-
+export default SearchRandom;
