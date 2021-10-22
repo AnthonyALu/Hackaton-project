@@ -1,14 +1,14 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
 import Recipes from "./components/recipes";
 import RecipeForm from "./components/recipeForm";
-import HomePage from './components/HomePage';
-import SerachByName from './components/SearchByName';
-import 'bootstrap/dist/css/bootstrap.css';
-import Footer from './components/Footer';
-import FoodByLetter from './components/FoodByLetter';
-import SearchRandom from './components/SerachRandom';
+import HomePage from "./components/HomePage";
+import SerachByName from "./components/SearchByName";
+import "bootstrap/dist/css/bootstrap.css";
+import Footer from "./components/Footer";
+import FoodByLetter from "./components/FoodByLetter";
+import SearchRandom from "./components/SearchRandom";
 
 const App = () => {
   return (
@@ -25,9 +25,7 @@ const App = () => {
         <Route path="/searchname">
           <SerachByName />
         </Route>
-        <Route path="/searchingredients">
-          <SearchByIngredients />
-        <Route path='/searchrandom'>
+        <Route path="/searchrandom">
           <SearchRandom />
         </Route>
         <Route path="/searchletters">
