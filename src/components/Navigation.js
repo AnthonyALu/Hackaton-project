@@ -22,6 +22,9 @@ const Navigation = () => {
             <Link exact to="/" className="nav-link">
               Home
             </Link>
+            <Link to="/recipes" className="nav-link">
+              Recipes
+            </Link>
             <Link to="/searchname" className="nav-link">
               Search By Name
             </Link>
