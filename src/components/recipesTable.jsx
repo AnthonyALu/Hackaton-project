@@ -7,13 +7,9 @@ class RecipesTable extends React.Component {
     {
       path: "title",
       label: "Title",
-      content: (movie) => (
-        <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+      content: (recipe) => (
+        <Link to={`/recipes/${recipe._id}`}>{recipe.title}</Link>
       ),
-    },
-    {
-      path: "genre.name",
-      label: "Genre",
     },
     {
       path: "numberInStock",
@@ -26,9 +22,9 @@ class RecipesTable extends React.Component {
 
     {
       key: "delete",
-      content: (movie) => (
+      content: (recipe) => (
         <button
-          onClick={() => this.props.onDelete(movie)}
+          onClick={() => this.props.onDelete(recipe)}
           className="btn btn-danger btn-sm"
         >
           Delete
@@ -38,12 +34,12 @@ class RecipesTable extends React.Component {
   ];
 
   render() {
-    const { movies, sortColumn, onSort } = this.props;
+    const { recipes, sortColumn, onSort } = this.props;
 
     return (
       <Table
         columns={this.columns}
-        data={movies}
+        data={recipes}
         sortColumn={sortColumn}
         onSort={onSort}
       />

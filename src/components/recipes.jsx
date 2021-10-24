@@ -1,113 +1,120 @@
 import React, { Component } from "react";
-import ListGroup from "./common/listGroup";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import FoodModal from "./FoodModal";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import SearchBox from "./common/searchBox";
-import RecipesTable from "./recipesTable";
-import { paginate } from "../utils/paginate";
+import { getRecipes, deleteRecipe } from "../services/recipeService";
 
 class Recipes extends React.Component {
   state = {
     recipes: [],
-    pageSize: 4,
-    currentPage: 1,
+    modalShow: false,
+    recipe: {},
     searchQuery: "",
-    sortColumn: { path: "title", order: "asc" },
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({ recipes: getRecipes() });
+  }
 
   handleDelete = (recipe) => {
-    const recipes = this.state.recipes.filter((r) => r._id !== recipe._id);
-    this.setState({ recipes });
-  };
-
-  handleSort = (sortColumn) => {
-    this.setState({ sortColumn });
-  };
-
-  handlePageChange = (page) => {
-    this.setState({ currentPage: page });
+    deleteRecipe(recipe.idMeal);
+    this.setState({ recipes: getRecipes() });
   };
 
   handleSearch = (query) => {
-    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+    this.setState({ searchQuery: query });
   };
 
-  getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-      selectedGenre,
-      searchQuery,
-      recipes: allRecipes,
-    } = this.state;
+  getSearchData = () => {
+    const { searchQuery, recipes: allRecipes } = this.state;
 
     let filteredRecipes = allRecipes;
     if (searchQuery) {
       filteredRecipes = allRecipes.filter((r) =>
-        r.title.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
-    } else if (selectedGenre && selectedGenre._id) {
-      filteredRecipes = allRecipes.filter(
-        (m) => m.genre._id === selectedGenre._id
+        r.strMeal.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
 
-    const sorted = _.orderBy(
-      filteredRecipes,
-      [sortColumn.path],
-      [sortColumn.order]
-    );
-    const recipes = paginate(sorted, currentPage, pageSize);
+    const sorted = _.orderBy(filteredRecipes);
 
-    return { totalCount: filteredRecipes.length, data: recipes };
+    return { totalCount: filteredRecipes.length, data: sorted };
+  };
+
+  setModalShow = (bool) => {
+    this.setState({ modalShow: bool });
+  };
+
+  setRecipe = (recipe) => {
+    this.setState({ recipe: recipe });
+  };
+
+  handleModal = (id) => {
+    this.setModalShow(true);
+    this.state.recipes.map((food) => {
+      if (food.idMeal === id) {
+        this.setRecipe(food);
+      }
+    });
   };
 
   render() {
+    const { recipes, modalShow, recipe, searchQuery } = this.state;
     const { length: count } = this.state.recipes;
-    const { pageSize, currentPage, searchQuery, sortColumn } = this.state;
     if (count === 0)
       return (
-        <Link
-          to="/recipes/new"
-          className="btn btn-primary"
-          style={{ marginBottom: 20 }}
-        >
-          New Recipe
-        </Link>
+        <h1 className="m-4 text-center">
+          You currently do not have any favourite recipes.
+        </h1>
       );
-
-    const { totalCount, data: recipes } = this.getPagedData();
+    const { totalCount, data: filteredRecipes } = this.getSearchData();
 
     return (
-      <div className="row">
-        <div className="col-3 m-2">
-          <ListGroup
-            items={this.state.genres}
-            selectedItem={this.state.selectedGenre}
-            onItemSelect={this.handleGenreSelect}
-          />
-        </div>
-        <div className="col">
-          <p>Showing {totalCount} recipes.</p>
-          <Link
-            to="/recipes/new"
-            className="btn btn-primary"
-            style={{ marginBottom: 20 }}
-          >
-            New Recipe
-          </Link>
+      <>
+        <Container>
           <SearchBox value={searchQuery} onChange={this.handleSearch} />
-          <RecipesTable
-            recipes={recipes}
-            sortColumn={sortColumn}
-            onDelete={this.handleDelete}
-            onSort={this.handleSort}
-          />
-        </div>
-      </div>
+        </Container>
+        <FoodModal
+          show={modalShow}
+          onHide={() => this.setModalShow(false)}
+          {...recipe}
+        />
+        <Container>
+          <Row>
+            {filteredRecipes.map((food) => {
+              const { idMeal, strCategory, strMeal, strMealThumb, strArea } =
+                food;
+              return (
+                <Col xs={6} md={4} key={idMeal}>
+                  <Card style={{ width: "18rem", margin: "15px" }}>
+                    <Card.Img variant="top" src={strMealThumb} />
+                    <Card.Body>
+                      <Card.Title>{strMeal}</Card.Title>
+                      <Card.Text>Category: {strCategory}</Card.Text>
+                      <Card.Text>{strArea} Cuisine</Card.Text>
+
+                      <Button
+                        variant="dark"
+                        onClick={() => this.handleModal(idMeal)}
+                      >
+                        View Recipe
+                      </Button>
+                      <Button
+                        className="m-2"
+                        variant="danger"
+                        onClick={() => this.handleDelete(food)}
+                      >
+                        Remove
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
+      </>
     );
   }
 }

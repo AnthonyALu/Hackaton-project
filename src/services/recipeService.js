@@ -5,25 +5,27 @@ export function getRecipes() {
 }
 
 export function getRecipe(id) {
-  return recipes.find((r) => r._id === id);
+  if (recipes.find((r) => r.idMeal === id)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export function saveRecipe(recipe) {
-  let selectedRecipe = recipes.find((r) => r._id === recipe._id) || {};
-  selectedRecipe.name = recipe.title;
-  selectedRecipe.ingredients = recipe.ingredients;
-  selectedRecipe.instructions = recipe.instructions;
-
-  if (!selectedRecipe._id) {
-    selectedRecipe._id = Date.now().toString();
-    recipes.push(selectedRecipe);
+  let str = recipe.idMeal;
+  let selectedRecipe = recipes.find((r) => r.idMeal === recipe.idMeal) || {};
+  if (!selectedRecipe.idMeal) {
+    recipes.push(recipe);
+    console.log(recipes);
+    return selectedRecipe;
+  } else {
+    deleteRecipe(selectedRecipe.idMeal);
   }
-
-  return selectedRecipe;
 }
 
 export function deleteRecipe(id) {
-  let selectedRecipe = recipes.find((r) => r._id === id);
+  let selectedRecipe = recipes.find((r) => r.idMeal === id);
   recipes.splice(recipes.indexOf(selectedRecipe), 1);
   return selectedRecipe;
 }
