@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
+import Like from "./common/like";
+import { getRecipes } from "../services/recipeService";
 
 const url = "https://www.themealdb.com/api/json/v1/1/random.php";
 const SearchRandom = () => {
   // set state to store random food with request
+
   const [randomFood, setRandomFood] = useState([]);
   const [showRandomFood, setShowRandomFood] = useState([]);
   const [error, setError] = useState("");
@@ -24,6 +27,7 @@ const SearchRandom = () => {
     fetchRandomFood();
   }, [showRandomFood]);
 
+  var rFood = showRandomFood;
   const { strMeal, strCategory, strMealThumb, strArea, strInstructions } =
     showRandomFood;
   const {
@@ -61,10 +65,14 @@ const SearchRandom = () => {
       >
         Get Random Recipe
       </Button>
+
       <Row className="mt-5">
         {showRandomFood ? (
           <Col sm={8}>
-            <h3>{strMeal}</h3>
+            <div className="d-flex flex-row">
+              <h3>{strMeal}</h3>
+              <Like food={rFood} />
+            </div>
             <h4>{strArea} Cuisine </h4>
             <h4>{strCategory}</h4>
             {strInstructions && (

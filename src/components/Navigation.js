@@ -8,7 +8,7 @@ const Navigation = () => {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href='/'>
+          <Navbar.Brand>
             <img
               alt=""
               src="https://www.svgrepo.com/show/287733/burger.svg"
@@ -18,17 +18,17 @@ const Navigation = () => {
             />{" "}
             Food Recipes
           </Navbar.Brand>
-          <Nav className='me-auto'>
-            <Link exact to='/' className='nav-link'>
+          <Nav className="me-auto">
+            <Link exact to="/" className="nav-link">
               Home
             </Link>
-            <Link to='/searchname' className='nav-link'>
+            <Link to="/searchname" className="nav-link">
               Search By Name
             </Link>
-            <Link to='/searchrandom' className='nav-link'>
+            <Link to="/searchrandom" className="nav-link">
               Search Random Food
             </Link>
-            <Link to='/searchletters' className='nav-link'>
+            <Link to="/searchletters" className="nav-link">
               Search By Letters
             </Link>
           </Nav>

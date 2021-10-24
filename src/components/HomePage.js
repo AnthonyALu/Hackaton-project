@@ -43,23 +43,6 @@ const HomePage = () => {
             </Button>
           </Card.Body>
         </Card>
-        <Card className="m-4 border-0">
-          <Card.Img
-            variant="top"
-            src="https://www.svgrepo.com/show/207956/cupboard-drawer.svg"
-          />
-          <Card.Body>
-            <Card.Title>Pantry</Card.Title>
-            <Card.Text>
-              Organise your ingredients to see what you can make.
-            </Card.Text>
-            <Button variant="dark">
-              <Link to="/pantry" style={linkStyle}>
-                View Pantry
-              </Link>
-            </Button>
-          </Card.Body>
-        </Card>
       </CardGroup>
     </>
   );
