@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, ListGroup, Form } from "react-bootstrap";
+import Like from "./common/like";
 
 const SearchByName = () => {
   // set state to store single food with request
@@ -10,12 +11,14 @@ const SearchByName = () => {
 
   const fetchRandomFood = async () => {
     try {
-      let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${singleFood}`);
+      let response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${singleFood}`
+      );
       let data = await response.json();
       setSingleFood(data.meals[0]);
     } catch (err) {
       setError(
-        `Something went wrong, please visit other pages and come back later. ${err.message}`
+        `Something went wrong, please try again later or enter something different.`
       );
     }
   };
@@ -28,7 +31,7 @@ const SearchByName = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-  }
+  };
 
   const { strMeal, strCategory, strMealThumb, strArea, strInstructions } =
     singleFood;
@@ -63,12 +66,18 @@ const SearchByName = () => {
       <Form onSubmit={(e) => submitForm(e)}>
         <Form.Group className="mb-3">
           <Form.Label>What you are looking for...</Form.Label>
-          <Form.Control type="text" placeholder="Type Food Name Here!" className="mb-2" onChange={(e) => setSingleFood(e.target.value)} singleFood={singleFood} />
+          <Form.Control
+            type="text"
+            placeholder="Search food by name here!"
+            className="mb-2"
+            onChange={(e) => setSingleFood(e.target.value)}
+            singleFood={singleFood}
+          />
           <Form.Text className="text-muted">
-            Hopefully find your food....
+            Hopefully you find your food....
           </Form.Text>
         </Form.Group>
-          <Button
+        <Button
           variant="dark"
           size="sm"
           active
@@ -77,11 +86,14 @@ const SearchByName = () => {
           Search by Name
         </Button>
       </Form>
-      
+
       <Row className="mt-5">
         {singleFood ? (
           <Col sm={8}>
-            <h3>{strMeal}</h3>
+            <div className="d-flex flex-row">
+              <h3>{strMeal}</h3>
+              <Like food={singleFood} />
+            </div>
             <h4>{strArea} Cuisine </h4>
             <h4>{strCategory}</h4>
             {strInstructions && (
@@ -127,4 +139,3 @@ const SearchByName = () => {
 };
 
 export default SearchByName;
-
