@@ -13,7 +13,7 @@ export function getRecipe(id) {
 }
 
 export function saveRecipe(recipe) {
-  let str = recipe.idMeal;
+  // let str = recipe.idMeal;
   let selectedRecipe = recipes.find((r) => r.idMeal === recipe.idMeal) || {};
   if (!selectedRecipe.idMeal) {
     recipes.push(recipe);

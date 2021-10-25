@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import FoodModal from "./FoodModal";
-import Like from "./common/like";
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import FoodModal from './FoodModal';
+import Like from './common/like';
 
 const FoodByLetter = () => {
   // store food in foods state when it's fetched
   const [foods, setFoods] = useState([]);
   const [recipe, setRecipe] = useState([]);
   // with clickig the letters, letter state will be add as a eendpoint to the API url
-  const [letter, setLetter] = useState("");
+  const [letter, setLetter] = useState('');
   // set state for showin the modal
   const [modalShow, setModalShow] = useState(false);
   // Create an array of alphabets
@@ -51,7 +51,7 @@ const FoodByLetter = () => {
     <>
       <Container>
         <h1
-          style={{ margin: "2rem auto", fontSize: "2rem", textAlign: "center" }}
+          style={{ margin: '2rem auto', fontSize: '2rem', textAlign: 'center' }}
         >
           Browse Food By Letter
         </h1>
@@ -66,10 +66,10 @@ const FoodByLetter = () => {
           {/* maping therough array of alphabet and showing each letter as a button */}
           {alphabet.map((l, idx) => {
             return (
-              <Col key={idx} style={{ margin: "10px" }}>
+              <Col key={idx} style={{ margin: '10px' }}>
                 <Button
                   pill
-                  variant="outline-dark"
+                  variant='outline-dark'
                   onClick={() => handleLetter(l)}
                 >
                   {l}
@@ -85,16 +85,16 @@ const FoodByLetter = () => {
               food;
             return (
               <Col xs={6} md={4} key={idMeal}>
-                <Card style={{ width: "18rem", margin: "15px" }}>
-                  <Card.Img variant="top" src={strMealThumb} />
+                <Card style={{ width: '18rem', margin: '15px' }}>
+                  <Card.Img variant='top' src={strMealThumb} />
                   <Card.Body>
-                    <div className="d-flex flex-row">
+                    <div className='d-flex flex-row'>
                       <Card.Title>{strMeal}</Card.Title>
                       <Like food={food} />
                     </div>
                     <Card.Text>Category: {strCategory}</Card.Text>
                     <Card.Text>{strArea} Cuisine</Card.Text>
-                    <Button variant="dark" onClick={() => handleModal(idMeal)}>
+                    <Button variant='dark' onClick={() => handleModal(idMeal)}>
                       View Recipe
                     </Button>
                   </Card.Body>

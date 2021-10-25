@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import FoodModal from "./FoodModal";
-import { Link } from "react-router-dom";
 import _ from "lodash";
 import SearchBox from "./common/searchBox";
 import { getRecipes, deleteRecipe } from "../services/recipeService";
@@ -60,7 +59,7 @@ class Recipes extends React.Component {
   };
 
   render() {
-    const { recipes, modalShow, recipe, searchQuery } = this.state;
+    const { modalShow, recipe, searchQuery } = this.state;
     const { length: count } = this.state.recipes;
     if (count === 0)
       return (
@@ -68,7 +67,7 @@ class Recipes extends React.Component {
           You currently do not have any favourite recipes.
         </h1>
       );
-    const { totalCount, data: filteredRecipes } = this.getSearchData();
+    const { data: filteredRecipes } = this.getSearchData();
 
     return (
       <>

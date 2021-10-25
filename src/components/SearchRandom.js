@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, ListGroup } from "react-bootstrap";
-import Like from "./common/like";
-import { getRecipes } from "../services/recipeService";
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
+import Like from './common/like';
 
-const url = "https://www.themealdb.com/api/json/v1/1/random.php";
+const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const SearchRandom = () => {
   // set state to store random food with request
 
   const [randomFood, setRandomFood] = useState([]);
   const [showRandomFood, setShowRandomFood] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [show, setShow] = useState(false);
   const fetchRandomFood = async () => {
     try {
@@ -49,27 +48,27 @@ const SearchRandom = () => {
   if (error) {
     return (
       <>
-        <Container className="mt-5">
+        <Container className='mt-5'>
           <h1>{error}</h1>
         </Container>
       </>
     );
   }
   return (
-    <Container className="mt-5">
+    <Container className='mt-5'>
       <Button
-        variant="dark"
-        size="lg"
+        variant='dark'
+        size='lg'
         active
         onClick={() => setShowRandomFood(randomFood)}
       >
         Get Random Recipe
       </Button>
 
-      <Row className="mt-5">
+      <Row className='mt-5'>
         {showRandomFood ? (
           <Col sm={8}>
-            <div className="d-flex flex-row">
+            <div className='d-flex flex-row'>
               <h3>{strMeal}</h3>
               <Like food={rFood} />
             </div>
@@ -80,12 +79,12 @@ const SearchRandom = () => {
                 {show
                   ? strInstructions
                   : `${strInstructions.substring(0, 200)}...`}
-                <button className="btn-modal" onClick={() => setShow(!show)}>
-                  {show ? "Show Less" : "Read More"}
+                <button className='btn-modal' onClick={() => setShow(!show)}>
+                  {show ? 'Show Less' : 'Read More'}
                 </button>
               </p>
             )}
-            <ListGroup variant="flush">
+            <ListGroup variant='flush'>
               <ListGroup.Item>
                 {strIngredient1} {strMeasure1}
               </ListGroup.Item>
@@ -108,8 +107,8 @@ const SearchRandom = () => {
           </Col>
         ) : null}
         {showRandomFood && (
-          <Col sm={4} className="random-img-container">
-            <img src={strMealThumb} alt="" className="random-img" />
+          <Col sm={4} className='random-img-container'>
+            <img src={strMealThumb} alt='' className='random-img' />
           </Col>
         )}
       </Row>
