@@ -53,7 +53,7 @@ const FoodByLetter = () => {
         <h1
           style={{ margin: "2rem auto", fontSize: "2rem", textAlign: "center" }}
         >
-          You can Find Food By First Letter
+          Browse Food By Letter
         </h1>
       </Container>
       <FoodModal
